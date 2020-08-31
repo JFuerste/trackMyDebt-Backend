@@ -40,8 +40,9 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/api/v1/signin*");
+        web.ignoring().antMatchers("/h2-console/**");
     }
 
     @Bean

@@ -1,11 +1,8 @@
-package com.jfuerste.trackmydebtbackend.security;
+package com.jfuerste.trackmydebtbackend.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -14,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
@@ -22,7 +20,7 @@ public class User {
     public enum Role {USER, ADMIN, USER_MANAGER}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
     @Email

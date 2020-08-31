@@ -1,5 +1,6 @@
-package com.jfuerste.trackmydebtbackend.security;
+package com.jfuerste.trackmydebtbackend.repositories;
 
+import com.jfuerste.trackmydebtbackend.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

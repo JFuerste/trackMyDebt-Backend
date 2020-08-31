@@ -23,7 +23,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     }
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+    public void configure(ResourceServerSecurityConfigurer resources) {
         resources.resourceId("api");
     }
 
@@ -40,6 +40,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint).accessDeniedHandler(new CustomAccessDeniedHandler());
+
     }
 
 }

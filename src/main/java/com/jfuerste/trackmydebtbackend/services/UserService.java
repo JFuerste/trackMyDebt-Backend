@@ -1,5 +1,7 @@
-package com.jfuerste.trackmydebtbackend.security;
+package com.jfuerste.trackmydebtbackend.services;
 
+import com.jfuerste.trackmydebtbackend.domain.User;
+import com.jfuerste.trackmydebtbackend.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -22,6 +25,6 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repository.findByEmail(username).orElseThrow(() -> new RuntimeException("User not found: " + username));
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Arrays.asList(authority));
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.singletonList(authority));
     }
 }

@@ -1,7 +1,7 @@
-package com.jfuerste.trackmydebtbackend.security.controllers;
+package com.jfuerste.trackmydebtbackend.controllers;
 
-import com.jfuerste.trackmydebtbackend.security.User;
-import com.jfuerste.trackmydebtbackend.security.UserRepository;
+import com.jfuerste.trackmydebtbackend.domain.User;
+import com.jfuerste.trackmydebtbackend.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
