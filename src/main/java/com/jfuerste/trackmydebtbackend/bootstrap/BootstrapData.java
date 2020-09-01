@@ -27,7 +27,13 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        //Only load data if none exists
+        if (userRepository.count() == 0){
+            loadData();
+        }
+    }
 
+    private void loadData() {
         User user = new User();
         user.setEmail("j@fuerste.com");
         user.setPassword(passwordEncoder.encode("secret"));
@@ -50,7 +56,5 @@ public class BootstrapData implements CommandLineRunner {
         transactionRepository.save(transaction);
 
         System.out.println("Loaded Test Data");
-
-
     }
 }
