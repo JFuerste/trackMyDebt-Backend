@@ -1,13 +1,14 @@
 package com.jfuerste.trackmydebtbackend.services;
 
 import com.jfuerste.trackmydebtbackend.domain.User;
+import dto.UserDTO;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import java.util.List;
 
 public interface UserService {
     void deleteUserById(Long id);
-    User findUserById(Long id);
+    UserDTO findUserById(Long id);
     org.springframework.security.core.userdetails.User getUserDetails(OAuth2Authentication authentication);
     User.Role getRole(OAuth2Authentication auth);
 
@@ -17,5 +18,5 @@ public interface UserService {
      * @param auth Authentication token of the requesting user
      * @return List of users that the requestor is allowed to see
      */
-    List<User> findAllAllowed(OAuth2Authentication auth);
+    List<UserDTO> findAllAllowed(OAuth2Authentication auth);
 }

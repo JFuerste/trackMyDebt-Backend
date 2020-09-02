@@ -1,7 +1,7 @@
 package com.jfuerste.trackmydebtbackend.controllers;
 
-import com.jfuerste.trackmydebtbackend.domain.User;
 import com.jfuerste.trackmydebtbackend.services.UserService;
+import dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +28,13 @@ public class UserController {
     }
 
     @GetMapping
-    ResponseEntity<List<User>> listAll(OAuth2Authentication authentication){
+    ResponseEntity<List<UserDTO>> listAll(OAuth2Authentication authentication){
         return new ResponseEntity(userService.findAllAllowed(authentication), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<User> deleteUser(@PathVariable Long id, OAuth2Authentication authentication){
-        User user = userService.findUserById(id);
+    ResponseEntity<UserDTO> deleteUser(@PathVariable Long id, OAuth2Authentication authentication){
+        UserDTO user = userService.findUserById(id);
         if (user != null){
             userService.deleteUserById(id);
         } else {

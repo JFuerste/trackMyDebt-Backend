@@ -2,6 +2,8 @@ package com.jfuerste.trackmydebtbackend.services;
 
 import com.jfuerste.trackmydebtbackend.domain.User;
 import com.jfuerste.trackmydebtbackend.repositories.UserRepository;
+import dto.UserDTO;
+import dto.mapper.UserMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,14 +14,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepository repository;
+    private final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserRepository repository, UserMapper userMapper) {
         this.repository = repository;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -35,8 +40,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public User findUserById(Long id) {
-        return repository.findById(id).orElse(null);
+    public UserDTO findUserById(Long id) {
+        User user = repository.findById(id).orElse(null);
+        return userMapper.userToUserDTO(user);
+
     }
 
     public org.springframework.security.core.userdetails.User getUserDetails(OAuth2Authentication authentication) {
@@ -61,7 +68,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 
     @Override
-    public List<User> findAllAllowed(OAuth2Authentication auth) {
+    public List<UserDTO> findAllAllowed(OAuth2Authentication auth) {
         org.springframework.security.core.userdetails.User userDetails = getUserDetails(auth);
         String role = userDetails.getAuthorities().stream().findFirst().get().getAuthority();
 
@@ -71,6 +78,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         } else {
             allowedUsers = repository.findAll();
         }
-        return allowedUsers;
+        return allowedUsers.stream()
+                .map(userMapper::userToUserDTO)
+                .collect(Collectors.toList());
     }
 }
