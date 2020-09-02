@@ -1,9 +1,9 @@
 package com.jfuerste.trackmydebtbackend.services;
 
 import com.jfuerste.trackmydebtbackend.domain.User;
+import com.jfuerste.trackmydebtbackend.dto.UserDTO;
+import com.jfuerste.trackmydebtbackend.dto.mapper.UserMapper;
 import com.jfuerste.trackmydebtbackend.repositories.UserRepository;
-import dto.UserDTO;
-import dto.mapper.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

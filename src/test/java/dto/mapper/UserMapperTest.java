@@ -1,7 +1,8 @@
 package dto.mapper;
 
 import com.jfuerste.trackmydebtbackend.domain.User;
-import dto.UserDTO;
+import com.jfuerste.trackmydebtbackend.dto.UserDTO;
+import com.jfuerste.trackmydebtbackend.dto.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

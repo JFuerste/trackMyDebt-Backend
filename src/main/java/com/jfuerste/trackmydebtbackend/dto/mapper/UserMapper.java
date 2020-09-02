@@ -1,7 +1,7 @@
-package dto.mapper;
+package com.jfuerste.trackmydebtbackend.dto.mapper;
 
 import com.jfuerste.trackmydebtbackend.domain.User;
-import dto.UserDTO;
+import com.jfuerste.trackmydebtbackend.dto.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

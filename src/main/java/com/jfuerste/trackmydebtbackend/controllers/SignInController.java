@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SignInController {
 
     private final UserRepository repository;
-
     private final PasswordEncoder passwordEncoder;
 
     public SignInController(UserRepository repository, PasswordEncoder passwordEncoder) {

@@ -1,7 +1,7 @@
 package com.jfuerste.trackmydebtbackend.services;
 
 import com.jfuerste.trackmydebtbackend.domain.User;
-import dto.UserDTO;
+import com.jfuerste.trackmydebtbackend.dto.UserDTO;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import java.util.List;

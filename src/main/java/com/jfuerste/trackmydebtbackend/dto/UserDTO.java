@@ -1,4 +1,4 @@
-package dto;
+package com.jfuerste.trackmydebtbackend.dto;
 
 
 import lombok.AllArgsConstructor;

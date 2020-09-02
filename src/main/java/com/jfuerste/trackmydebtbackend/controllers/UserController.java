@@ -1,7 +1,7 @@
 package com.jfuerste.trackmydebtbackend.controllers;
 
+import com.jfuerste.trackmydebtbackend.dto.UserDTO;
 import com.jfuerste.trackmydebtbackend.services.UserService;
-import dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
