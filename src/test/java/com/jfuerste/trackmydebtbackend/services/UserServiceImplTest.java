@@ -53,7 +53,7 @@ class UserServiceImplTest {
         assertEquals(EMAIL, userDetails.getUsername());
         assertEquals(pw, userDetails.getPassword());
         assertEquals(ADMIN.name(), userDetails.getAuthorities().stream().findFirst().get().getAuthority());
-        verify(userRepository.findByEmail(anyString()));
+        verify(userRepository).findByEmail(anyString());
     }
 
     @Test
@@ -77,7 +77,7 @@ class UserServiceImplTest {
 
         assertEquals(EMAIL, dto.getEmail());
         assertEquals(ID, dto.getId());
-        verify(userRepository.findById(anyLong()));
+        verify(userRepository).findById(anyLong());
     }
 
     @Test
