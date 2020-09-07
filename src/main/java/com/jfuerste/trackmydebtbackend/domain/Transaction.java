@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -27,5 +27,6 @@ public class Transaction {
     private User receiver;
 
     private Double amount;
-    private LocalDate timestamp;
+    private LocalDateTime timestamp;
+    private String reason;
 }

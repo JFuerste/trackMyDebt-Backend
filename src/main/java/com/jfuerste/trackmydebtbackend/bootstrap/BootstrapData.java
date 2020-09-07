@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @Profile("dev")
@@ -51,7 +51,7 @@ public class BootstrapData implements CommandLineRunner {
                 .amount(2.5D)
                 .receiver(user)
                 .sender(user2)
-                .timestamp(LocalDate.now())
+                .timestamp(LocalDateTime.now())
                 .build();
         transactionRepository.save(transaction);
 
