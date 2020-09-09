@@ -5,14 +5,12 @@ import com.jfuerste.trackmydebtbackend.domain.User;
 import com.jfuerste.trackmydebtbackend.repositories.TransactionRepository;
 import com.jfuerste.trackmydebtbackend.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
-@Profile("dev")
 public class BootstrapData implements CommandLineRunner {
 
     private final PasswordEncoder passwordEncoder;
