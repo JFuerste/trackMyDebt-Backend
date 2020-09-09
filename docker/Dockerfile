@@ -1,7 +1,7 @@
 FROM maven:3-openjdk-11 AS MAVEN_BUILD
 
-COPY pom.xml /build/
-COPY src /build/src/
+COPY ../pom.xml /build/
+COPY ../src /build/src/
 
 WORKDIR /build/
 RUN mvn package
