@@ -38,13 +38,19 @@ public class BootstrapData implements CommandLineRunner {
         user.setEmail("j@fuerste.com");
         user.setPassword(passwordEncoder.encode("secret"));
         user.setRole(User.Role.ADMIN);
-        userRepository.save(user);
+        user.setDisplayName("Joshua");
+
 
         User user2 = User.builder()
+                .displayName("Michael")
                 .email("m@mutert.com")
                 .password(passwordEncoder.encode("secret"))
                 .role(User.Role.USER)
                 .build();
+
+        user.addFriend(user2);
+
+        userRepository.save(user);
         userRepository.save(user2);
 
         Transaction transaction = Transaction.builder()
