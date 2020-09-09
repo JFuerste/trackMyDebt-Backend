@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -24,7 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-@Order(Ordered.HIGHEST_PRECEDENCE)
+//@Order(-5001)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -52,7 +50,6 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/api/v1/signin*");
-        web.ignoring().antMatchers("/api/v1/signin**");
         web.ignoring().antMatchers("/h2-console/**");
     }
 
@@ -72,16 +69,14 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/oauth/token").permitAll()
                 .antMatchers("/oauth/authorize").permitAll()
-                .antMatchers("/signin*").permitAll()
-                .antMatchers("/signin/**").permitAll()
+                .antMatchers("/api/v1/signin*").permitAll()
+                .antMatchers("/api/v1/signin/**").permitAll()
                 //.antMatchers("/api/v1/users**").hasAuthority("ADMIN")
                 //.antMatchers("/api/v1/users/**").hasAuthority("ADMIN")
                 .antMatchers("/api/v1/**").authenticated()

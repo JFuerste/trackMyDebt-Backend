@@ -1,8 +1,10 @@
 package com.jfuerste.trackmydebtbackend.security.configuration;
 
+import com.jfuerste.trackmydebtbackend.errors.CustomAccessDeniedHandler;
 import com.jfuerste.trackmydebtbackend.errors.CustomAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -28,7 +30,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     }
 
 
-/*    @Override
+    @Override
     public void configure(HttpSecurity http) throws Exception {
         http
                 //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -46,7 +48,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 .exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint).accessDeniedHandler(new CustomAccessDeniedHandler());
 
-    }*/
+    }
 
     @Bean
     public TokenStore tokenStore() {
