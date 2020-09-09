@@ -72,14 +72,16 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/oauth/token").permitAll()
                 .antMatchers("/oauth/authorize").permitAll()
-                .antMatchers("/api/v1/signin*").permitAll()
-                .antMatchers("/api/v1/signin/**").permitAll()
+                .antMatchers("/signin*").permitAll()
+                .antMatchers("/signin/**").permitAll()
                 //.antMatchers("/api/v1/users**").hasAuthority("ADMIN")
                 //.antMatchers("/api/v1/users/**").hasAuthority("ADMIN")
                 .antMatchers("/api/v1/**").authenticated()

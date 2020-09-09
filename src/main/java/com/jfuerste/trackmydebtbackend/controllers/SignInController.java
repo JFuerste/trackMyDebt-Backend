@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/api/v1/signin")
+@RequestMapping("/signin")
 public class SignInController {
 
     private final UserRepository repository;
@@ -41,7 +41,7 @@ public class SignInController {
         return mapper.userToUserDTO(u);
     }
 
-    @PostMapping("/api/v1/validateEmail")
+    @PostMapping("/validateEmail")
     Boolean emailExists(@RequestParam String email) {
         return repository.existsByEmail(email);
     }
