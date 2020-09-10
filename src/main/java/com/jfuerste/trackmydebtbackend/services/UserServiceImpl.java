@@ -46,15 +46,23 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     }
 
-    public org.springframework.security.core.userdetails.User getUserDetails(OAuth2Authentication authentication) {
+    public org.springframework.security.core.userdetails.User getSpringUserDetails(OAuth2Authentication authentication) {
         org.springframework.security.core.userdetails.User auth =
                 (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
         return auth;
     }
 
     @Override
+    public User getUser(OAuth2Authentication auth2Authentication) {
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) auth2Authentication.getPrincipal();
+        String email = principal.getUsername();
+        return repository.findByEmail(email).orElse(null);
+    }
+
+    @Override
     public User.Role getRole(OAuth2Authentication auth) {
-        org.springframework.security.core.userdetails.User userDetails = getUserDetails(auth);
+        org.springframework.security.core.userdetails.User userDetails = getSpringUserDetails(auth);
         String role = userDetails.getAuthorities().stream().findFirst().get().getAuthority();
 
         if (role.equals(User.Role.ADMIN.name())){
@@ -69,7 +77,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public List<UserDTO> findAllAllowed(OAuth2Authentication auth) {
-        org.springframework.security.core.userdetails.User userDetails = getUserDetails(auth);
+        org.springframework.security.core.userdetails.User userDetails = getSpringUserDetails(auth);
         String role = userDetails.getAuthorities().stream().findFirst().get().getAuthority();
 
         List<User> allowedUsers;

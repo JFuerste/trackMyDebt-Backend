@@ -43,6 +43,14 @@ public class User {
     @ManyToMany(mappedBy = "friends")
     private Set<User> friendOf = new HashSet<>();
 
+    @OneToMany(mappedBy = "sender")
+    @EqualsAndHashCode.Exclude
+    private Set<Transaction> sentTransactions = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "receiver")
+    private Set<Transaction> receivedTransactions = new HashSet<>();
+
 
     public void addFriend(User user){
         friends.add(user);

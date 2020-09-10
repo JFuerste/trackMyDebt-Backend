@@ -1,15 +1,16 @@
 package com.jfuerste.trackmydebtbackend.services;
 
-import com.jfuerste.trackmydebtbackend.domain.Transaction;
 import com.jfuerste.trackmydebtbackend.domain.User;
+import com.jfuerste.trackmydebtbackend.dto.TransactionDTO;
 
 import java.util.List;
 
 public interface TransactionService {
 
-    List<Transaction> findAllInvolved(User user);
-    List<Transaction> findAllReceived(User user);
-    List<Transaction> findAllSent(User user);
+    List<TransactionDTO> findAllInvolved(User user);
+    List<TransactionDTO> findAllReceived(User user);
+    List<TransactionDTO> findAllSent(User user);
+    TransactionDTO createNewTransaction(TransactionDTO dto);
 
 
 }

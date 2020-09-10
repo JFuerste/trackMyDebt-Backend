@@ -59,6 +59,14 @@ public class BootstrapData implements CommandLineRunner {
                 .build();
         transactionRepository.save(transaction);
 
+        Transaction transaction2 = Transaction.builder()
+                .amount(1.5D)
+                .receiver(user2)
+                .sender(user)
+                .timestamp(LocalDateTime.now())
+                .build();
+        transactionRepository.save(transaction2);
+
         System.out.println("Loaded Test Data");
     }
 }

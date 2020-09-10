@@ -1,9 +1,6 @@
 package com.jfuerste.trackmydebtbackend.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,14 +16,18 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "sender", referencedColumnName = "id")
     private User sender;
+
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "receiver", referencedColumnName = "id")
     private User receiver;
 
     private Double amount;
     private LocalDateTime timestamp;
-    private String reason;
+    private String shortReason;
+    private String longReason;
 }

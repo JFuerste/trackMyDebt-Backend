@@ -17,8 +17,11 @@ public class TransactionDTO {
     private Long id;
     private String sender;
     private String receiver;
+    private Long senderId;
+    private Long receiverId;
 
     private Double amount;
     private LocalDateTime timestamp;
-    private String reason;
+    private String shortReason;
+    private String longReason;
 }

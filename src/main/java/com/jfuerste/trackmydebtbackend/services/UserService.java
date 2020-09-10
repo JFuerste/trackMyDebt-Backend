@@ -9,7 +9,8 @@ import java.util.List;
 public interface UserService {
     void deleteUserById(Long id);
     UserDTO findUserById(Long id);
-    org.springframework.security.core.userdetails.User getUserDetails(OAuth2Authentication authentication);
+    org.springframework.security.core.userdetails.User getSpringUserDetails(OAuth2Authentication authentication);
+    User getUser(OAuth2Authentication auth2Authentication);
     User.Role getRole(OAuth2Authentication auth);
 
     /**
