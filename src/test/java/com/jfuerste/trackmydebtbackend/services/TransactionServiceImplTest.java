@@ -13,10 +13,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class TransactionServiceImplTest {
@@ -44,16 +44,13 @@ class TransactionServiceImplTest {
         transactionReceived.setId(1L);
         Transaction transactionSent = new Transaction();
         transactionSent.setId(2L);
+        User user = new User();
+        user.setReceivedTransactions(Set.of(transactionReceived));
+        user.setSentTransactions(Set.of(transactionSent));
 
-        when(transactionRepository.findByReceiver(any())).thenReturn(List.of(transactionReceived));
-        when(transactionRepository.findBySender(any())).thenReturn(List.of(transactionSent));
-
-
-        List<TransactionDTO> transactions = service.findAllInvolved(new User());
+        List<TransactionDTO> transactions = service.findAllInvolved(user);
 
         assertThat(transactions).hasSize(2);
-        verify(transactionRepository).findBySender(any());
-        verify(transactionRepository).findByReceiver(any());
     }
 
     @Test
