@@ -3,13 +3,12 @@ package com.jfuerste.trackmydebtbackend.dto.mapper;
 import com.jfuerste.trackmydebtbackend.domain.Transaction;
 import com.jfuerste.trackmydebtbackend.domain.User;
 import com.jfuerste.trackmydebtbackend.dto.TransactionDTO;
+import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = UserQualifier.class)
+@Mapper(componentModel = "spring", uses = UserQualifier.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface TransactionMapper {
-    TransactionMapper INSTANCE = Mappers.getMapper(TransactionMapper.class);
 
     @Mapping(source = "sender", target = "sender")
     @Mapping(source = "sender", target = "senderId")

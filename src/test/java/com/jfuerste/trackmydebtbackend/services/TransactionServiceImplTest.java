@@ -8,7 +8,6 @@ import com.jfuerste.trackmydebtbackend.dto.mapper.UserQualifier;
 import com.jfuerste.trackmydebtbackend.repositories.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -29,12 +28,13 @@ class TransactionServiceImplTest {
     @Mock
     UserQualifier qualifier;
 
-    @InjectMocks
     TransactionMapperImpl mapper;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        mapper = new TransactionMapperImpl(qualifier);
         service = new TransactionServiceImpl(transactionRepository, mapper);
     }
 
