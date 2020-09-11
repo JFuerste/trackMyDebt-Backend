@@ -70,6 +70,7 @@ class UserControllerTest {
     @Test
     void deleteUser() throws Exception {
         when(userService.findUserById(anyLong())).thenReturn(new UserDTO());
+        when(userService.getUser(any())).thenReturn(User.builder().id(2L).build());
 
         mockMvc.perform(delete("/api/v1/users/2").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

@@ -3,6 +3,7 @@ package com.jfuerste.trackmydebtbackend.controllers;
 
 import com.jfuerste.trackmydebtbackend.domain.User;
 import com.jfuerste.trackmydebtbackend.dto.TransactionDTO;
+import com.jfuerste.trackmydebtbackend.errors.JsonErrorObject;
 import com.jfuerste.trackmydebtbackend.services.TransactionService;
 import com.jfuerste.trackmydebtbackend.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/api/v1/transactions")
@@ -48,7 +51,17 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity createTransaction(@RequestBody TransactionDTO dto, OAuth2Authentication auth2Authentication){
-        return new ResponseEntity(transactionService.createNewTransaction(dto), HttpStatus.OK);
+    public ResponseEntity createTransaction(@RequestBody @Valid TransactionDTO dto, OAuth2Authentication auth2Authentication){
+        User user = userService.getUser(auth2Authentication);
+        String email = user.getEmail();
+
+
+        if (email.equals(dto.getSender()) || email.equals(dto.getReceiver())){
+            return new ResponseEntity(transactionService.createNewTransaction(dto), HttpStatus.OK);
+        } else {
+            return new ResponseEntity(
+                    new JsonErrorObject("Cannot create transaction for strangers!", 403),
+                    HttpStatus.FORBIDDEN);
+        }
     }
 }

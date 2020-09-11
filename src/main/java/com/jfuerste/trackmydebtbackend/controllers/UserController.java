@@ -1,6 +1,7 @@
 package com.jfuerste.trackmydebtbackend.controllers;
 
 import com.jfuerste.trackmydebtbackend.dto.UserDTO;
+import com.jfuerste.trackmydebtbackend.errors.JsonErrorObject;
 import com.jfuerste.trackmydebtbackend.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,13 +36,20 @@ public class UserController {
     @DeleteMapping("/{id}")
     ResponseEntity<UserDTO> deleteUser(@PathVariable Long id, OAuth2Authentication authentication){
         UserDTO user = userService.findUserById(id);
+
+        if (!userService.getUser(authentication).getId().equals(id)){
+            return new ResponseEntity(
+                    new JsonErrorObject("Cannot delete user!", 403),
+                    HttpStatus.FORBIDDEN);
+        }
+
         if (user != null){
             userService.deleteUserById(id);
         } else {
             throw new RuntimeException("User not found");
         }
 
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 
 
