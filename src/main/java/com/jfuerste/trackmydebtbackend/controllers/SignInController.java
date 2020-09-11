@@ -36,7 +36,7 @@ public class SignInController {
         return repository.save(u);
     }
 
-    @PostMapping("/api/v1/validateEmail")
+    @PostMapping("/validateEmail")
     Boolean emailExists(@RequestParam String email) {
         return repository.existsByEmail(email);
     }
